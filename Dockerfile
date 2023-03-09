@@ -7,7 +7,6 @@ RUN apt-get update \
     wget \
     nala \
     bat \
-    fc-cache \
     unzip \
     exa \
     && apt-get clean \
