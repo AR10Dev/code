@@ -29,7 +29,7 @@ RUN curl --fail --location --show-error "https://github.com/ryanoasis/nerd-fonts
     && fc-cache -f
 
 # Add Startship
-RUN curl -sS https://starship.rs/install.sh | sh \
+RUN curl -sS https://starship.rs/install.sh | sh -- -y \
     && echo 'eval "$(starship init zsh)"' >> ~/.zshrc \
     && mkdir -p ~/.config
 
