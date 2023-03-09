@@ -10,6 +10,7 @@ RUN apt-get update \
     nala \
     bat \
     unzip \
+    fontconfig \
     exa \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* 
