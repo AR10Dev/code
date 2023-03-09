@@ -22,10 +22,11 @@ RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/
     -p https://github.com/zsh-users/zsh-completions
 
 # Add FiraCode Font
-RUN curl -s "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/FiraCode.zip" -o FiraCode.zip \
-    && unzip FiraCode.zip \
-    && mv *.ttf /usr/share/fonts/ \
-    && fc-cache -fv
+RUN curl --fail --location --show-error "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/FiraCode.zip" -o FiraCode.zip \
+    && unzip -o -q -d ./FiraCode FiraCode.zip \
+    && mv ./FiraCode/*.ttf /usr/share/fonts/ \
+    && rm -r -d ./FiraCode FiraCode.zip \
+    && fc-cache -f
 
 # Add Startship
 RUN curl -sS https://starship.rs/install.sh | sh \
