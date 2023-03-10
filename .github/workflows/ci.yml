@@ -30,4 +30,4 @@ jobs:
           platforms: linux/arm64
           context: .
           push: true
-          tags: ar10dev/code:latest
+          tags: ghcr.io/ar10dev/code:latest
