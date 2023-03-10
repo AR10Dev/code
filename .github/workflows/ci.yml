@@ -30,4 +30,4 @@ jobs:
           platforms: linux/arm64
           context: .
           push: true
-          tags: ${{ github.actor }}/code:latest
+          tags: ar10dev/code:latest
