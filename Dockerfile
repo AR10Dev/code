@@ -36,8 +36,8 @@ RUN curl -sS https://starship.rs/install.sh | sh -s -- -y \
 COPY starship.toml ~/.config/
 
 # Add RTX
-RUN wget -qO - [https://rtx.pub/gpg-key.pub](https://rtx.pub/gpg-key.pub) | gpg --dearmor | sudo tee /usr/share/keyrings/rtx-archive-keyring.gpg 1> /dev/null \
-    && echo "deb [signed-by=/usr/share/keyrings/rtx-archive-keyring.gpg arch=arm64] [https://rtx.pub/deb](https://rtx.pub/deb) stable main" | sudo tee /etc/apt/sources.list.d/rtx.list \
+RUN wget -qO - https://rtx.pub/gpg-key.pub | gpg --dearmor | sudo tee /usr/share/keyrings/rtx-archive-keyring.gpg 1> /dev/null \
+    && echo "deb [signed-by=/usr/share/keyrings/rtx-archive-keyring.gpg arch=arm64] https://rtx.pub/deb stable main" | sudo tee /etc/apt/sources.list.d/rtx.list \
     && sudo apt update \
     && sudo apt install -y rtx
 
