@@ -15,7 +15,6 @@ RUN apt-get update \
     unzip \
     fontconfig \
     exa \
-    zsh \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* 
 
@@ -37,6 +36,9 @@ RUN wget -qO - https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor
     && echo "deb [arch=amd64,arm64 signed-by=/usr/share/keyrings/vscode-archive-keyring.gpg ] https://packages.microsoft.com/repos/code stable main" | tee /etc/apt/sources.list.d/vscode.list \
     && apt update \
     && apt install -y code
+    
+# Add Startship
+RUN curl -sS https://starship.rs/install.sh | sh -s -- -y
 
 # Creating a non-root user
 ARG USERNAME=code
@@ -51,16 +53,12 @@ RUN groupadd --gid $USER_GID $USERNAME \
 # Set the default user
 USER $USERNAME
 
-# Configure Zsh
+# Configure Zsh and add Starship config
 RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.5/zsh-in-docker.sh)" -- \
     -p git \
     -p https://github.com/zsh-users/zsh-autosuggestions \
     -p https://github.com/zsh-users/zsh-completions \
-    -x
-
-# Add Startship
-RUN curl -sS https://starship.rs/install.sh | sh -s -- -y \
-    && echo 'eval "$(starship init zsh)"' >> ~/.zshrc \
+    && && echo 'eval "$(starship init zsh)"' >> ~/.zshrc \
     && mkdir -p ~/.config
 
 COPY starship.toml ~/.config/
