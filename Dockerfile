@@ -55,7 +55,8 @@ USER $USERNAME
 RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.5/zsh-in-docker.sh)" -- \
     -p git \
     -p https://github.com/zsh-users/zsh-autosuggestions \
-    -p https://github.com/zsh-users/zsh-completions
+    -p https://github.com/zsh-users/zsh-completions \
+    -x
 
 # Add Startship
 RUN curl -sS https://starship.rs/install.sh | sh -s -- -y \
