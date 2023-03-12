@@ -58,6 +58,7 @@ RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/
     -p git \
     -p https://github.com/zsh-users/zsh-autosuggestions \
     -p https://github.com/zsh-users/zsh-completions \
+    -x \
     && echo 'eval "$(starship init zsh)"' >> ~/.zshrc \
     && mkdir -p ~/.config
 
