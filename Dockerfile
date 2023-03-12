@@ -15,6 +15,7 @@ RUN apt-get update \
     unzip \
     fontconfig \
     exa \
+    zsh \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* 
 
