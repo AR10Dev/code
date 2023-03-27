@@ -63,6 +63,6 @@ RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/
     && echo 'eval "$(starship init zsh)"' >> ~/.zshrc \
     && mkdir -p ~/.config
 
-COPY starship.toml ~/.config/
+COPY starship.toml /home/$USERNAME/.config/
 
 CMD [ "code", "tunnel", "--accept-server-license-terms" ]
