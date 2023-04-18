@@ -39,7 +39,8 @@ RUN wget -qO - https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor
     && apt install -y code
     
 # Add Startship
-RUN curl -sS https://starship.rs/install.sh | sh -s -- -y
+RUN curl -sS https://starship.rs/install.sh | sh -s -- -y \
+    && mkdir -p ~/.config
 
 # Creating a non-root user
 ARG USERNAME=code
@@ -55,10 +56,10 @@ RUN groupadd --gid $USER_GID $USERNAME \
 USER $USERNAME
 
 # Configure Zsh and add Starship config
-RUN sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" \
-    && echo 'eval "$(starship init zsh)"' >> ~/.zshrc \
-    && mkdir -p ~/.config
+RUN sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-COPY starship.toml /home/$USERNAME/.config/
+COPY .dotfiles/ /home/$USERNAME/.dotfiles/
+
+RUN sudo /home/$USERNAME/.dotfiles/install.sh
 
 CMD [ "code", "tunnel", "--accept-server-license-terms" ]
