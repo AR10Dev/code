@@ -33,3 +33,5 @@ jobs:
           context: .
           push: true
           tags: ghcr.io/ar10dev/code:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
