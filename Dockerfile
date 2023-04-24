@@ -55,6 +55,8 @@ RUN groupadd --gid $USER_GID $USERNAME \
 # Set the default user
 USER $USERNAME
 
+WORKDIR /home/$USERNAME/
+
 # Configure Zsh and add Starship config
 RUN sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
@@ -63,4 +65,4 @@ COPY .dotfiles/ /home/$USERNAME/.dotfiles/
 RUN  sudo chmod u+x /home/$USERNAME/.dotfiles/install.sh \
     && sudo chmod u+x /home/$USERNAME/entrypoint.sh
 
-CMD [ "code", "tunnel", "--accept-server-license-terms" ]
+CMD [ "entrypoint.sh" ]
