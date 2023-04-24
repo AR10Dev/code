@@ -60,7 +60,7 @@ RUN sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/t
 
 COPY .dotfiles/ /home/$USERNAME/.dotfiles/
 
-RUN sudo chmod 777 /home/$USERNAME/.dotfiles/install.sh \
-    && /home/$USERNAME/.dotfiles/install.sh
+RUN  sudo chmod u+x /home/$USERNAME/.dotfiles/install.sh \
+    && sudo chmod u+x /home/$USERNAME/entrypoint.sh
 
 CMD [ "code", "tunnel", "--accept-server-license-terms" ]
