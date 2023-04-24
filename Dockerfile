@@ -58,10 +58,8 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
 
 COPY --chown=$USER_UID:$USER_GID .dotfiles/ /home/$USERNAME/.dotfiles/
-COPY --chown=$USER_UID:$USER_GID entrypoint.sh /home/$USERNAME/
 
-RUN chmod u+x /home/$USERNAME/.dotfiles/install.sh \
-    && chmod u+x /home/$USERNAME/entrypoint.sh
+RUN chmod u+x /home/$USERNAME/.dotfiles/install.sh
 
 # Set the default user
 USER $USERNAME
