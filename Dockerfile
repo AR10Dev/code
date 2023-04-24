@@ -61,6 +61,7 @@ WORKDIR /home/$USERNAME/
 RUN sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 COPY .dotfiles/ /home/$USERNAME/.dotfiles/
+COPY entrypoint.sh /home/$USERNAME/
 
 RUN  sudo chmod u+x /home/$USERNAME/.dotfiles/install.sh \
     && sudo chmod u+x /home/$USERNAME/entrypoint.sh
