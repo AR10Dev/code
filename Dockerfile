@@ -16,8 +16,13 @@ RUN apt-get update \
     fontconfig \
     exa \
     zsh \
+    locales \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* 
+
+# Add Locales
+RUN localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+ENV LANG en_US.utf8
 
 # Add FiraCode Font
 RUN curl --fail --location --show-error "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/FiraCode.zip" -o FiraCode.zip \
@@ -52,6 +57,12 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
 
+COPY .dotfiles/ /home/$USERNAME/.dotfiles/
+COPY entrypoint.sh /home/$USERNAME/
+
+RUN chmod u+x /home/$USERNAME/.dotfiles/install.sh \
+    && chmod u+x /home/$USERNAME/entrypoint.sh
+
 # Set the default user
 USER $USERNAME
 
@@ -59,11 +70,5 @@ WORKDIR /home/$USERNAME/
 
 # Configure Zsh and add Starship config
 RUN sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-COPY .dotfiles/ /home/$USERNAME/.dotfiles/
-COPY entrypoint.sh /home/$USERNAME/
-
-RUN  sudo chmod u+x /home/$USERNAME/.dotfiles/install.sh \
-    && sudo chmod u+x /home/$USERNAME/entrypoint.sh
 
 CMD [ "entrypoint.sh" ]
