@@ -53,12 +53,12 @@ ARG USER_UID=1001
 ARG USER_GID=$USER_UID
 
 RUN groupadd --gid $USER_GID $USERNAME \
-    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
+    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME -s /bin/zsh \
     && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
 
-COPY .dotfiles/ /home/$USERNAME/.dotfiles/
-COPY entrypoint.sh /home/$USERNAME/
+COPY --chown=$USER_UID:$USER_GID .dotfiles/ /home/$USERNAME/.dotfiles/
+COPY --chown=$USER_UID:$USER_GID entrypoint.sh /home/$USERNAME/
 
 RUN chmod u+x /home/$USERNAME/.dotfiles/install.sh \
     && chmod u+x /home/$USERNAME/entrypoint.sh
@@ -71,4 +71,4 @@ WORKDIR /home/$USERNAME/
 # Configure Zsh and add Starship config
 RUN sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-CMD [ "entrypoint.sh" ]
+CMD [ "code", "tunnel", "--accept-server-license-terms" ]
