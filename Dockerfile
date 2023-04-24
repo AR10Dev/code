@@ -44,7 +44,7 @@ RUN curl -sS https://starship.rs/install.sh | sh -s -- -y \
 
 # Creating a non-root user
 ARG USERNAME=code
-ARG USER_UID=1000
+ARG USER_UID=1001
 ARG USER_GID=$USER_UID
 
 RUN groupadd --gid $USER_GID $USERNAME \
