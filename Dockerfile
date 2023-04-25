@@ -2,8 +2,8 @@ FROM ubuntu:rolling
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update \
-    && apt-get install -y \
+RUN apt update \
+    && apt install -y \
     sudo \
     gnupg \
     git \
@@ -17,7 +17,6 @@ RUN apt-get update \
     exa \
     zsh \
     locales \
-    && apt-get clean \
     && rm -rf /var/lib/apt/lists/* 
 
 # Add Locales
@@ -41,11 +40,11 @@ RUN wget -qO - https://rtx.pub/gpg-key.pub | gpg --dearmor | tee /usr/share/keyr
 RUN wget -qO - https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | tee /usr/share/keyrings/vscode-archive-keyring.gpg 1> /dev/null \
     && echo "deb [arch="$(dpkg --print-architecture)" signed-by=/usr/share/keyrings/vscode-archive-keyring.gpg] https://packages.microsoft.com/repos/code stable main" | tee /etc/apt/sources.list.d/vscode.list \
     && apt update \
-    && apt install -y code
+    && apt install -y code \
+    && apt-get clean
     
 # Add Startship
-RUN curl -sS https://starship.rs/install.sh | sh -s -- -y \
-    && mkdir -p ~/.config
+RUN curl -sS https://starship.rs/install.sh | sh -s -- -y
 
 # Creating a non-root user
 ARG USERNAME=code
