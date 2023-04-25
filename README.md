@@ -16,4 +16,8 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /home/ubuntu/projects:/home/code/workspace
       - /home/ubuntu/.vscode-cli:/home/code/.vscode-cli
+      # VSCode extensions folder
+      - /home/ubuntu/.vscode-server/extensions:/home/code/.vscode-server/extensions
+      # Git Config
+      - /home/ubuntu/.gitconfig:/home/code/.gitconfig
 ```
