@@ -33,13 +33,13 @@ RUN curl --fail --location --show-error "https://github.com/ryanoasis/nerd-fonts
 
 # Add RTX
 RUN wget -qO - https://rtx.pub/gpg-key.pub | gpg --dearmor | tee /usr/share/keyrings/rtx-archive-keyring.gpg 1> /dev/null \
-    && echo "deb [arch=amd64,arm64 signed-by=/usr/share/keyrings/rtx-archive-keyring.gpg] https://rtx.pub/deb stable main" | tee /etc/apt/sources.list.d/rtx.list \
+    && echo "deb [arch="$(dpkg --print-architecture)" signed-by=/usr/share/keyrings/rtx-archive-keyring.gpg] https://rtx.pub/deb stable main" | tee /etc/apt/sources.list.d/rtx.list \
     && apt update \
     && apt install -y rtx
 
 # Add VSCode
 RUN wget -qO - https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | tee /usr/share/keyrings/vscode-archive-keyring.gpg 1> /dev/null \
-    && echo "deb [arch=amd64,arm64 signed-by=/usr/share/keyrings/vscode-archive-keyring.gpg ] https://packages.microsoft.com/repos/code stable main" | tee /etc/apt/sources.list.d/vscode.list \
+    && echo "deb [arch="$(dpkg --print-architecture)" signed-by=/usr/share/keyrings/vscode-archive-keyring.gpg] https://packages.microsoft.com/repos/code stable main" | tee /etc/apt/sources.list.d/vscode.list \
     && apt update \
     && apt install -y code
     
