@@ -65,7 +65,9 @@ USER $USERNAME
 
 WORKDIR /home/$USERNAME/
 
-# Configure Zsh and add Starship config
+RUN mkdir .vscode-server
+
+# Install Oh My Zsh
 RUN sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 CMD [ "code", "tunnel", "--accept-server-license-terms" ]
