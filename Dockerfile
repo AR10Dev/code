@@ -10,10 +10,8 @@ RUN apt update \
     curl \
     wget \
     nala \
-    bat \
     unzip \
     fontconfig \
-    exa \
     zsh \
     locales \
     && rm -rf /var/lib/apt/lists/* 
@@ -31,15 +29,11 @@ RUN curl --fail --location --show-error "https://github.com/ryanoasis/nerd-fonts
 
 # Add RTX
 RUN wget -qO - https://rtx.pub/gpg-key.pub | gpg --dearmor | tee /usr/share/keyrings/rtx-archive-keyring.gpg 1> /dev/null \
-    && echo "deb [arch="$(dpkg --print-architecture)" signed-by=/usr/share/keyrings/rtx-archive-keyring.gpg] https://rtx.pub/deb stable main" | tee /etc/apt/sources.list.d/rtx.list \
-    && apt update \
-    && apt install -y rtx
+    && echo "deb [arch="$(dpkg --print-architecture)" signed-by=/usr/share/keyrings/rtx-archive-keyring.gpg] https://rtx.pub/deb stable main" | tee /etc/apt/sources.list.d/rtx.list
 
 # Add VSCode
 RUN wget -qO - https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | tee /usr/share/keyrings/vscode-archive-keyring.gpg 1> /dev/null \
     && echo "deb [arch="$(dpkg --print-architecture)" signed-by=/usr/share/keyrings/vscode-archive-keyring.gpg] https://packages.microsoft.com/repos/code stable main" | tee /etc/apt/sources.list.d/vscode.list \
-    && apt update \
-    && apt install -y code \
     && apt-get clean
     
 # Add Startship
@@ -71,4 +65,5 @@ ENV VSCODE_CLI_DATA_DIR /home/$USERNAME/.vscode-data
 # Install Oh My Zsh
 RUN sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+ENTRYPOINT ["docker-entrypoint.sh"]
 CMD [ "code", "tunnel", "--accept-server-license-terms", "--disable-telemetry" ]
