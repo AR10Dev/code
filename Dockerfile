@@ -9,7 +9,6 @@ RUN apt update \
     git \
     curl \
     wget \
-    build-essential \
     nala \
     bat \
     unzip \
@@ -65,9 +64,11 @@ USER $USERNAME
 
 WORKDIR /home/$USERNAME/
 
-RUN mkdir .vscode-server
+RUN mkdir .vscode-data
+
+ENV VSCODE_CLI_DATA_DIR /home/$USERNAME/.vscode-data
 
 # Install Oh My Zsh
 RUN sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-CMD [ "code", "tunnel", "--accept-server-license-terms" ]
+CMD [ "code", "tunnel", "--accept-server-license-terms", "--disable-telemetry" ]
