@@ -65,5 +65,7 @@ ENV VSCODE_CLI_DATA_DIR /home/$USERNAME/.vscode-data
 # Install Oh My Zsh
 RUN sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+COPY --chown=$USER_UID:$USER_GID --chmod=755 docker-entrypoint.sh /usr/local/bin/
+
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD [ "code", "tunnel", "--accept-server-license-terms", "--disable-telemetry" ]
