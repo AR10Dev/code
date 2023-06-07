@@ -1,9 +1,10 @@
 #!/bin/bash
 
-sudo nala upgrade
+sudo apt update
 apt show code
 if [ $? -eq 100 ]; then
-    sudo nala install -y \
+    sudo apt install -y \
+    nala \
     bat \
     exa \
     rtx \

@@ -9,7 +9,6 @@ RUN apt update \
     git \
     curl \
     wget \
-    nala \
     unzip \
     fontconfig \
     zsh \
