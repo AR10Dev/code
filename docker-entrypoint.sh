@@ -10,3 +10,10 @@ if [ $? -eq 100 ]; then
     rtx \
     code
 fi
+
+# Drop privileges (when asked to) if root, otherwise run as current user
+if [ "$(id -u)" == "0" ] && [ "${PUID}" != "0" ]; then
+  su-exec ${PUID}:${PGID} "$@"
+else
+  exec "$@"
+fi
