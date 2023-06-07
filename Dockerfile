@@ -67,4 +67,4 @@ RUN sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/t
 COPY --chown=$USER_UID:$USER_GID --chmod=755 docker-entrypoint.sh /usr/local/bin/
 
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD [ "/bin/code", "tunnel", "--accept-server-license-terms", "--disable-telemetry" ]
+CMD [ "code", "tunnel", "--accept-server-license-terms", "--disable-telemetry" ]
