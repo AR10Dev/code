@@ -20,7 +20,7 @@ RUN localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 ENV LANG en_US.utf8
 
 # Add FiraCode Font
-RUN curl --fail --location --show-error "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/FiraCode.zip" -o FiraCode.zip \
+RUN curl --fail --location --show-error "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/FiraCode.zip" -o FiraCode.zip \
     && unzip -o -q -d ./FiraCode FiraCode.zip \
     && mv ./FiraCode/*.ttf /usr/share/fonts/ \
     && rm -r -d ./FiraCode FiraCode.zip \
