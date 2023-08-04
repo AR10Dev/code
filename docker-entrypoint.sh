@@ -9,6 +9,13 @@ if [ $? -eq 1 ]; then
     exa \
     rtx \
     code
+else
+    dpkg -l nala
+    if [ $? -eq 1 ]; then
+        sudo nala upgrade -y
+    else
+        sudo apt upgrade -y
+    fi
 fi
 
 # Drop privileges (when asked to) if root, otherwise run as current user
