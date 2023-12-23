@@ -7,7 +7,6 @@ if [ $? -eq 1 ]; then
     nala \
     bat \
     exa \
-    rtx \
     code
 else
     dpkg -l nala
